@@ -6,9 +6,22 @@ public class PMovementP3 : MonoBehaviour
 {
     public CharacterController controller;
 
+    public Transform cam1;
+    //public Transform startpos;
+    float camtilt = 0f;
+    float lmxcamtilt = 25f;
+
+    bool isWallrun = false;
+    public static bool pisWallrun = false; 
+
     //12 24 14 22 8 12.5 8 14
     float speed = 8f;
     float runspeed = 14f;
+
+    float wallspeed = 10f;
+
+    bool stopup = true;
+    public static bool pwrtilt = false;
 
     //was-9.8
     float gravity = -22.8f;
@@ -73,6 +86,7 @@ public class PMovementP3 : MonoBehaviour
         {
             airslow = 1f;
             jumpnum = 2;
+            pwrtilt = false;
         }
 
         if (!isGrounded)
@@ -83,15 +97,18 @@ public class PMovementP3 : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (WallD.pisRWallrun == false)
             {
-                if (Input.GetAxis("Vertical") >0)
+                if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    Setspeed2();
-                }
-                if (Input.GetAxis("Vertical") < 0)
-                {
-                    speed = 12f;
+                    if (Input.GetAxis("Vertical") > 0)
+                    {
+                        Setspeed2();
+                    }
+                    if (Input.GetAxis("Vertical") < 0)
+                    {
+                        speed = 12f;
+                    }
                 }
             }
         }
@@ -100,6 +117,30 @@ public class PMovementP3 : MonoBehaviour
             speed = 12f;
         }
 
+        if (WallD.pisRWallrun == true)
+        {
+            if (!isGrounded)
+            {
+                pwrtilt = true;
+                //if (velocity)
+                if (Input.GetAxis("Vertical") > 0)
+                {
+                    controller.Move(transform.forward * wallspeed * Time.deltaTime);
+                }
+                if (stopup == true)
+                {
+                    velocity.y = 0;
+                    stopup = false;
+                }
+                gravity = -.8f;
+            }
+        }
+        if (WallD.pisRWallrun == false)
+        {
+            pwrtilt = false;
+            stopup = true;
+            gravity = -22.8f;
+        }
     }
     public void Setspeed2()
     {

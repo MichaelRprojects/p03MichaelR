@@ -6,6 +6,8 @@ public class MouseLookP3 : MonoBehaviour
 {
     public Transform playerBody;
     float xRotation = 0f;
+    float camtilt = 0f;
+    float rwmxcamtilt = 25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +25,22 @@ public class MouseLookP3 : MonoBehaviour
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            if (PMovementP3.pwrtilt == false)
+            {
+                transform.localRotation = Quaternion.Euler(xRotation, 0f, camtilt);
+                if (camtilt > 0)
+                {
+                camtilt += Time.deltaTime * -rwmxcamtilt * 2;
+                }
+            }
+            if (PMovementP3.pwrtilt == true)
+            {
+                transform.localRotation = Quaternion.Euler(xRotation, 0f, camtilt);
+                if (camtilt < rwmxcamtilt)
+                {
+                    camtilt += Time.deltaTime * rwmxcamtilt * 2;
+                }
+            }
             playerBody.Rotate(Vector3.up * mouseX);
         //}
         //if (PMovement.isdead == true)
