@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallD : MonoBehaviour
+public class WallD3 : MonoBehaviour
 {
-    public static bool pisRWallrun = false;
-    //public static bool pisLWallrun = false;
+    //public static bool pisRWallrun = false;
+    public static bool pisLWallrun = false;
     Collider ocollider;
     float size;
     float rotyw;
@@ -23,7 +23,7 @@ public class WallD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     //on trigger enter
@@ -31,7 +31,7 @@ public class WallD : MonoBehaviour
     //public void OnCollisionEnter(Collision collision)
     {
         if (other.gameObject.layer == 6)
-       //if (other.tag == "Enviormentt")
+        //if (other.tag == "Enviormentt")
         {
             ocollider = other.GetComponent<Collider>();
             //size = ocollider.bounds.size.y;
@@ -45,17 +45,17 @@ public class WallD : MonoBehaviour
                 //{
                 if (WallD2.pisFWallrun == false)
                 {
-                    //if(isleft == true)
+                    //if (isleft == true)
                     //{
-                    //pisLWallrun = true;
+                    //if (WallD.pisRWallrun == false)
+                    //{
+                    //Debug.Log("Left");
+                    pisLWallrun = true;
+                    //}
                     //}
                     //if (isleft == false)
                     //{
-                    //if (WallD3.pisLWallrun == false)
-                    //{
-                        pisRWallrun = true;
-                    //Debug.Log("right");
-                    //}
+                        //pisRWallrun = true;
                     //}
                 }
                 //}
@@ -67,12 +67,12 @@ public class WallD : MonoBehaviour
         chwdir = false;
         //if (isleft == false)
         //{
-        //Debug.Log("right out");
-        pisRWallrun = false;
+        //pisRWallrun = false;
         //}
         //if (isleft == true)
         //{
-            //pisLWallrun = false;
+        //Debug.Log("left out");
+        pisLWallrun = false;
         //}
         //if (iscenter == true)
         //{
@@ -103,15 +103,15 @@ public class WallD : MonoBehaviour
             {
                 //if(iscenter == true)
                 //{
-                    //centerd = true;
+                //centerd = true;
                 //}
                 //if (isfright == true)
                 //{
-                    //fcenterd = true;
+                //fcenterd = true;
                 //}
                 //if (isbright == true)
                 //{
-                    //bcenterd = true;
+                //bcenterd = true;
                 //}
                 PMovementP3.walldir += wallh.normal;
                 //Debug.DrawRay(wallh.point, PMovementP3.walldir.normalized, Color.green, 2.5f);
